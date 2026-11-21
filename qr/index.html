@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MonBus PdM — télécharger l'application</title>
+  <meta name="description" content="MonBus PdM : l'appli gratuite des bus du Pays de Montbéliard. Horaires, plan, itinéraires et alertes trafic.">
+  <link rel="icon" href="../favicon.png">
+  <link rel="stylesheet" href="../style.css">
+  <script>
+    // Adresse imprimée sur les autocollants : NE PAS DÉPLACER cette page.
+    // Quand l'appli est publiée, renseigner les liens : le téléphone est alors redirigé vers son store.
+    // Le paramètre ?src=snap, ?src=fac… est transmis au Play Store pour mesurer d'où viennent les installations.
+    var URL_PLAYSTORE = '';   // ex. 'https://play.google.com/store/apps/details?id=…'
+    var URL_APPSTORE = '';    // ex. 'https://apps.apple.com/app/id…'
+    (function () {
+      var ua = navigator.userAgent || '';
+      var src = new URLSearchParams(location.search).get('src') || 'qr';
+      if (/android/i.test(ua) && URL_PLAYSTORE) {
+        location.replace(URL_PLAYSTORE + '&referrer=' + encodeURIComponent('utm_source=' + src + '&utm_medium=autocollant'));
+      } else if (/iphone|ipad|ipod/i.test(ua) && URL_APPSTORE) {
+        location.replace(URL_APPSTORE);
+      }
+    })();
+  </script>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <img src="../logo.png" alt="Logo MonBus PdM">
+    <h1>MonBus PdM</h1>
+    <p class="sous">L'appli gratuite des bus du Pays de Montbéliard</p>
+    <p id="dispo"><span class="bouton secondaire">Bientôt sur Google Play</span></p>
+  </header>
+
+  <div class="grille">
+    <div class="carte"><strong>🕐 Prochains passages</strong><br>Toutes les lignes évolitY, selon les horaires officiels.</div>
+    <div class="carte"><strong>🗺️ Arrêts proches</strong><br>Le plan du réseau et les arrêts autour de vous.</div>
+    <div class="carte"><strong>🔀 Itinéraires</strong><br>Le meilleur trajet, direct ou avec correspondance.</div>
+    <div class="carte"><strong>🔔 Alertes</strong><br>Grèves et déviations en notification, dès leur annonce.</div>
+  </div>
+
+  <div class="carte">
+    <p style="margin:0">Gratuite, sans compte. L'application arrive très bientôt sur Android, puis sur iPhone.
+      En attendant, découvrez-la sur <a href="../index.html">monbuspdm.github.io</a>.</p>
+  </div>
+
+  <footer>
+    Application indépendante, non affiliée à évolitY ni à Keolis ·
+    <a href="../confidentialite.html">Confidentialité</a>
+  </footer>
+</main>
+<script>
+  // Si un store est renseigné mais que le visiteur est sur ordinateur : boutons vers les stores
+  (function () {
+    var liens = [];
+    if (URL_PLAYSTORE) liens.push('<a class="bouton" href="' + URL_PLAYSTORE + '">Télécharger sur Google Play</a>');
+    if (URL_APPSTORE) liens.push('<a class="bouton" href="' + URL_APPSTORE + '">Télécharger sur l\'App Store</a>');
+    if (liens.length) document.getElementById('dispo').innerHTML = liens.join(' ');
+  })();
+</script>
+</body>
+</html>
